@@ -14,6 +14,9 @@
       --chat-received: #f1f1f1;
       --border-color: #ddd;
       --timestamp-color: #888;
+      --hacker-green: #00ff41;
+      --hacker-dark: #0d0208;
+      --cyber-blue: #00b4d8;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -42,6 +45,20 @@
       line-height: 1.6;
       padding: 0;
       margin: 0;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -1;
     }
 
     header {
@@ -49,12 +66,33 @@
       color: white;
       padding: 2rem 1rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(225deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(315deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+      background-size: 20px 20px;
+      z-index: 0;
     }
 
     h1 {
       font-size: 2.2rem;
       margin-bottom: 0.5rem;
       font-weight: 700;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
 
     .subtitle {
@@ -62,6 +100,8 @@
       opacity: 0.9;
       max-width: 600px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     main {
@@ -76,6 +116,7 @@
       background-color: var(--chat-bg);
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--cyber-blue);
     }
 
     .chat-container {
@@ -83,6 +124,7 @@
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      border: 1px solid var(--border-color);
     }
 
     .chat-header {
@@ -92,6 +134,17 @@
       display: flex;
       align-items: center;
       border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .chat-header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--hacker-green), var(--cyber-blue), var(--accent-color));
     }
 
     .chat-header h2 {
@@ -163,6 +216,7 @@
       background-color: var(--chat-bg);
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--accent-color);
     }
 
     .metadata h3 {
@@ -185,11 +239,34 @@
       border-top: 1px solid var(--border-color);
       font-size: 0.9rem;
       color: var(--timestamp-color);
+      background-color: var(--bg-color);
+      position: relative;
     }
 
     .highlight {
       color: var(--accent-color);
       font-weight: bold;
+    }
+
+    .cyber-quote {
+      font-style: italic;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      background-color: rgba(0,180,216,0.05);
+      border-left: 4px solid var(--cyber-blue);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .cyber-quote::before {
+      content: """;
+      font-size: 4rem;
+      position: absolute;
+      top: -1rem;
+      left: 0.5rem;
+      color: rgba(0,180,216,0.2);
+      font-family: Georgia, serif;
     }
 
     @media (max-width: 600px) {
@@ -211,9 +288,13 @@
 
   <main>
     <section class="intro">
-      <p>Willkommen in diesem digitalen Zeitkapsel. Hier findest du authentische Chatprotokolle aus dem Jahr 2009 – eine Zeit, in der Jabber/XMPP noch weit verbreitet war und philosophische Diskussionen über Demokratie, Erkenntnistheorie und Diskordianismus in den frühen Morgenstunden geführt wurden.</p>
+      <p>Willkommen in dieser digitalen Zeitkapsel. Hier findest du authentische Chatprotokolle aus dem Jahr 2009 – eine Zeit, in der Jabber/XMPP noch weit verbreitet war und philosophische Diskussionen über Demokratie, Erkenntnistheorie und Diskordianismus in den frühen Morgenstunden geführt wurden.</p>
       <p>Diese Gespräche sind unbearbeitet und zeigen die Gedankenwelt junger Netzaktivisten und Philosophiebegeisterter in einer Zeit, als das Internet noch anders war.</p>
     </section>
+
+    <div class="cyber-quote">
+      "Wir erschaffen eine Welt, in der jeder an jedem Ort seine Meinungen äußern kann, ohne Angst davor haben zu müssen, zum Schweigen gezwungen oder zur Konformität gezwungen zu werden... Eure Rechtsvorstellungen von Eigentum, Redefreiheit, Persönlichkeit, Freizügigkeit und Kontext treffen auf uns nicht zu. Sie alle basieren auf der Stofflichkeit, hier gibt es keine Materie." — John Perry Barlow, Unabhängigkeitserklärung des Cyberspace, 1996
+    </div>
 
     <section class="chat-container">
       <div class="chat-header">
@@ -225,7 +306,7 @@
             Hey
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:06:54</span>
           </div>
         </div>
@@ -245,7 +326,7 @@
             deine partei^^
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:10:52</span>
           </div>
         </div>
@@ -255,7 +336,7 @@
             ich wollte mich der diskussion nicht entziehen^^
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:11:06</span>
           </div>
         </div>
@@ -280,12 +361,172 @@
           </div>
         </div>
 
+        <div class="message sent">
+          <div class="message-content">
+            Die Frage nach dem Newsletter-System Sponsoring.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:12:04</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            nein, glaube nicht
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:12:22</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Schade.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:12:29</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            gibste mal eben link?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:12:41</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ah. Meintest du den Fukupwikithread oder die Frage :D?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:13:09</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            den thread
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:13:17</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Super.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:13:25</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Sec.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:13:26</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich habe keine ahnung, worum es geht ...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:13:30</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            http://fuckup.homeunix.net/channels/5357
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:13:43</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ah okay, den thread habe ich nie aufgerufen. war irgendwie so ein langweiliger titel^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:14:06</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ach, das ist dein parteiname^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:14:17</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            such dir nen anderen^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:14:20</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            x)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:14:26</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Für Vorschläge bin ich offen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:14:34</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich wollte nen Namen, der gleich sagt, worums geht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:15:13</span>
+          </div>
+        </div>
+
         <div class="message received">
           <div class="message-content">
             also wie ich schon sagte, bin ich kein so großer demokratie-fan.^^ will sagen: ich misstraue der breiten masse eher
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:15:47</span>
           </div>
         </div>
@@ -295,7 +536,7 @@
             demokratie ist schon notwendig, einfach als regulativ, dass sich die herrschenden nicht völlig abkoppeln von den interessen des volkes ...
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:16:22</span>
           </div>
         </div>
@@ -315,7 +556,7 @@
             genau
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:16:32</span>
           </div>
         </div>
@@ -330,13 +571,213 @@
           </div>
         </div>
 
+        <div class="message sent">
+          <div class="message-content">
+            Aber das ist letztendlich ne gute Frage.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:17:06</span>
+          </div>
+        </div>
+
         <div class="message received">
           <div class="message-content">
             als liberaler sage ich: demokratie ist, wenn zwei wölfe und ein schaf darüber abstimmen, wer als nächster gefressen wird ;D
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:17:23</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Matthias - ein Freund mit dem ich schon öfters darüber geredet hatte - wollte erst nen Trockenlauf, um eine Studie daran durchzuführen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:17:46</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Da die nächste Wahl für BPID ohnehin erst in 4 Jahren wäre, könnte man sowas durchaus probieren :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:18:06</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ja, vorallem: das offenlegen der Wahl.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:18:21</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Das bringt Probleme mit sich.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:18:30</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            offenlegen halte auch für keine gute idee
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:18:34</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Wählerkauf eventuell.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:18:37</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            die meisten menschen sind oppurtunisten
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:18:41</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Vertraust du der IT so stark?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:18:47</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            in welchem zusammenhang?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:18:57</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            IT Wahl geheim verhindert Überprüfbarkeit.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:19:34</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich bin ja überhaupt gegen die ganze idee einer IT-wahl^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:19:51</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Eine äquivalente Sicherheitslage kriegt man meiner Meinung nach erst, wenn man die Wahl öffentlich durchführt.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:20:16</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            :D
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:20:23</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Nur so kriegt man die Dynamik.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:20:30</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ja, aber welche dynamik?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:20:39</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            todesstrafe würde als erste eingeführt
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:20:45</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Hehe. Ich glaube nich:)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:20:50</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich bin da optimistisch.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:20:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich schätze das ist da wieder son "Ich würde das ordentlich verwenden aber die anderen nicht"-Ding, wie beim Grundeinkommen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:21:44</span>
           </div>
         </div>
 
@@ -345,7 +786,7 @@
             "Das beste Argument gegen die <i>Demokratie</i> ist ein <i>fünf Minuten</i> Gespräch mit einem Wähler." - Churchill
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:21:54</span>
           </div>
         </div>
@@ -357,6 +798,66 @@
           <div class="message-meta">
             <span class="sender">Per Guth</span>
             <span class="timestamp">23:22:03</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich glaube schon, dass die leute das "ordentlich verwenden" würde - aber halt in ihrem sinne
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:22:26</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Also die Idee wird sicher irgendwo anders auch demnächst aufkommen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:22:28</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Also bleibt uns ohnehin nichts anderes ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:22:35</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und da sind nunmal die meisten für die todesstrafe für kinderschäner
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:22:39</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            die idee, das volk entscheiden zu lassen, ist so neu auch nicht^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:22:57</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            in der schweiz haben sie sowas ja quasi, deshalb haben die parteien da ja auch kaum macht
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:23:18</span>
           </div>
         </div>
 
@@ -372,10 +873,30 @@
 
         <div class="message received">
           <div class="message-content">
+            oder in kalifornien
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:23:25</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ja, nur neu ist, dass "hintenrum" bei uns einzuführen :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:24:04</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
             in der schweiz funktioniert es ganz gut
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:24:06</span>
           </div>
         </div>
@@ -385,7 +906,7 @@
             in kalifornien hat es zur staatspleite geführt
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:24:16</span>
           </div>
         </div>
@@ -395,8 +916,18 @@
             weil die bürger sowohl gegen jede sozialkürzung als auch gegen jede steuererhöhung gewählt haben
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:24:32</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und das auf kosten derjenigen, die noch nicht wählen dürfen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:24:50</span>
           </div>
         </div>
 
@@ -412,11 +943,41 @@
 
         <div class="message received">
           <div class="message-content">
+            nämlich den ungeborenen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:24:57</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
             im grunde ist es vor allem egoismus
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:25:08</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und eine frage der mobilisierung
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:25:18</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            du kriegst immer die mobilisiert, die es direkt betrifft
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:25:28</span>
           </div>
         </div>
 
@@ -445,7 +1006,7 @@
             diese bildungs-argument führen humanisten seit 200 jahren ins feld ...
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:26:38</span>
           </div>
         </div>
@@ -465,8 +1026,2488 @@
             geh mal in die düsseldorfer altstadt^^
           </div>
           <div class="message-meta">
-            <span class="sender">Stephan Dörner</span>
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
             <span class="timestamp">23:26:57</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            es gibt einfach menschen, die werden dumm geboren und sterben dumm und nichts auf der welt kann daran etwas ändern^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:27:18</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und das sind nicht wenige
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:27:21</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Vielleicht kann man die in ein Netzwerk einbetten, dass durch "klügere" gestützt wird.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:27:41</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            dann hast du wieder keine echte demokratie
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:28:05</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich meine, dass du auf der Plattform auch Grundsatzfragen beantworten und diskutieren kannst. Die werden dann deinen Freunden mehr angezeigt, als die von anderen. Du siehst, wie deine Freunde sich entscheiden und wie sie begründen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:28:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich denke, dass steigert die Qualität :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:29:16</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            da kommen ganz schnell dynamiken wie in einer diktatur zustande
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:29:31</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wie du hast gegen das kinderschändergesetz gestimmt! du kinderschändersymphatisant!
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:29:47</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Möglich. Aber wir wären z.B. eine Gruppe, die da dagegen halten würde.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:30:03</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich seh schon den mob mit mistgabeln vor mir^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:30:17</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Und: unsere Argumente sind besser ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:30:23</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Haha.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:30:28</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            sie basieren auf anderen werturteilen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:30:35</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            da gibt es kein besser oder schlechter
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:30:40</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ne, das nicht. Aber ich denke, dass der Mensch durchaus eine Präferenz hat.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:30:58</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich meine, wir könnten vielleicht ganz gut für oder gegen eine zinssenkung argumentieren, da würden sich die ungebildeten leiten lassen - aber schlecht gegen die todesstrafe für kinderschänder
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:31:25</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Das würde ich so nicht behaupten wollen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:31:44</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Aber das Problem hierbei ist: ich kenne die Masse nicht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:31:55</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich kenne die Leute aus der Uni, die aus der Realschule und aus dem Gymi und das wars fast schon.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:32:15</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich war auf einer gesamtschule
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:32:28</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und das hat mir gereicht für eine grobe einschätzung^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:32:47</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            x)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:32:51</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Was ist mit dem Argument, dass es ohnehin passieren wird und wir nur jetzt die Möglichkeit haben signifikanten Einfluss zu nehmen?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:33:30</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ach ja, der sozialismus wird auch ohnehin kommen ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:33:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Haha. Andere Kategorie!
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:34:02</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            "so oder so, die erde wird rot - entweder sozialstisch oder blutrot"^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:34:15</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich glaube nicht an historischen Teleologie
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:34:48</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Also ich seh das ja schon so - sofern Startrek den "Sozialismus" repräsentiert ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:34:52</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            (Ich hab deinen Artikel dazu, zu meiner Schande, noch nicht gelesen)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:35:04</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wir leben ja auch im sozialismus, kind of
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:35:05</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            also es sind zwar nicht alle reich aber zumindest keiner arm
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:35:35</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich bin sehr technik-optimistisch.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:35:35</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich auch
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:35:40</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Imho lässt die uns gar keine Wahl, als da hin zu kommen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:35:53</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            was die direkte demokratie angeht? warum?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:36:05</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Was den Sozialismus angeht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:36:14</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ach so, ja, der wird bleiben
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:36:29</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und noch ausgebaut werden
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:36:37</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich hoffe, dass sich durch die Technik in ein paar Jahrhunderten eine neue Grenze ergiebt.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:37:01</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Der Weltraum :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:37:04</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            das wird auf jeden fall kommen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:37:13</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Und die Möglichkeit, dass wir abwandern können ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:37:15</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich glaube auch an die menschheit
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:37:18</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich glaube, dass wir es schaffen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:37:22</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wir werden den planeten verlassen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:37:27</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            die menschheit wird mal groß
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:37:32</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            aber vielleicht bin ich auch wirklich zu pessimistisch, was die demokratie angeht
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:37:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich sehe es als fundamental wichtig für die Gesundheit von Subgesellschaften an, dass sie abwandern können.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:38:01</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich würde das gerne mündlich ausführen ...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:38:13</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            hasse es zu tippen ...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:38:17</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            kurz afk
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:38:48</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich hab da auch eine etwas "pessimistische" Theorie. Imho degenerieren Demokratien ab einem gewissen Alter, einer gewissen Größe automatisch. Es bleibt nur die Möglichkeit des Abwanderns - etc. etc.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:38:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich hab Skype, TS und ein Telephon.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:39:13</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Auch kurz afk.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:39:22</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            lol, lass mal telefonieren gleich
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:39:44</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich habe auch eine flatrate, kann dich anrufen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">23:39:56</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            [Telefonnummer entfernt]
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">23:42:47</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            "Um aus den Vorgaben eine wissenschaftlichen Lösungsansatz abzuleiten, muss deren Tauglichkeit überprüfbaren Kriterien folgen.<br />Das wiederum bedeutet, dass diese fünf Kräfte [siehe S. 99] nicht vollkommen ohne Bezug untereinander sein dürfen, sondern ein gemeinsames Kriterium besitzen müssen, das den Übergang von einer zur anderen erlaubt. Diesen inneren Zusammenhang bezeichnet man auch als »applikative Konsequenz«.<br />[…]<br />Da wir es mit psychischen Faktoren zu tun haben, muss die applikative Konsequenz psychologischer Natur sein."<br /><br />98<br /><br />Basierend auf dem "Edlen Achtfachen Pfad":<br />Ein "Arbeitsplan":<br /><br />   1. Kontrolle des Geistes<br />   2. Gegenwärtigsein in der Wirklichkeit<br />   3. Bewusstsein der Unbeständigkeit<br />      "Diese Erkenntnis ist unzweifelhaft ein intellektueller Vorgang. […] Damit [aber] die Erleuchtung tatsächlich Auswirkungen auf unser Leben hat […] muss die Erkenntnis gleichsam in ein Gefühl »eingepackt« werden, denn das Unbewusste nimmt nur solche Bewusstseinsinhalte dauerhaft in sich auf, die von einer Emotion begleitet sind." (146, 147)<br />   4. Nicht-Anhaften<br />   5. Allumfassende Liebe<br />
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:09:37</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Zum Buddha werden in 5 Wochen<br /><br /><br /><br />Art<br />	Buch<br /><br /><br />Autor<br />	Giulio Cesare Giacobbe
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:09:57</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            sollen wir nicht mal einen philosphischen podcast machen, in dem ich dich zum diskordianismus interviewe?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:12:13</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Oha.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:12:40</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Interessant wäre es durchaus.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:12:59</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            eigentlich wäre die perfekte ergänzung bone
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:13:15</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ja, warum?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:13:39</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            der könnte aus physikalischer sicht nämlich beschreiben, warum er nicht an die objektive wirklichkeit glaubt
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:13:48</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und er hat genau das gleiche dilemma
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:14:02</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            für ihn ist die einzige objektive erkenntnis, dass es keine erkenntnis gibt - und das ist ein innerer widerspruch
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:14:29</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Studiert Physik?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:14:30</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ja
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:14:33</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ah, toll :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:14:39</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und er leitet seine sicht der dinge immer von der allgemeinen relativätstheorie (jede eigenschaft, selbst zeit, braucht ein bezugssystem) und von der quantenmechanik ab
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:15:14</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Mal schauen, inwiefern wir uns da treffen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:16:48</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            warum hast du auf twitter eigentlich deinen updates geschützt?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:20:24</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Mittlerweile nicht mehr.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:20:31</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ah, gut
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:20:35</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich hatte es ursprünglich einfach, weil ich nicht wollte, dass man mich per Google findet :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:20:51</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Letztendlich, dadurch, dass ichs nirgends verlinkt habe, wird man das nicht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:21:07</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Vielleicht sollte ich davon aber auch langsam abrücken.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:21:22</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            So langsam wird der Inhalt ja einigermaßen Vertretbar :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:21:34</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            mein twitter-account ist verlinkt und ich verlinke auf dich ....
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:21:41</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            außerdem bist du doch für das offene voten^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:21:54</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            kennst du die leute auf http://erisisch.de/doku.php eigentlich alle?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:22:16</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich schätze, dass ich von den 50 Leuten ca. 40 kenne.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:22:43</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            übrigens sehr geil, der letzte satz in form der grafik^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:22:46</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            gerade erst gesehen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:22:59</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Die Schriftart ist auch der Hammer :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:22:59</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Den Spruch gabs vor Urzeiten im Diskordianismus Artikel von Wiki. Die haben sich leider entschlossen die Zitat-Beispiele-Sektion zu streichen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:23:46</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Hab versucht etwas Einfluss zu nehmen aber ohne Erfolg :/
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:24:20</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            demokratie ist halt scheiße, sag ich ja ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:24:56</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Wenn man außer acht lässt, dass ich autark genug war, ums selbst zu hosten, dann ja ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:25:29</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Abwandern können ist eben verdammt wichtig.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:25:43</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            hehe, stimmt
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:25:49</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Das schon gesehen: http://erisisch.de/doku.php?id=erisier
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:26:04</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            ?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:26:04</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            und im netz hat ja sozusagen eh jeder seinen eigene staat, da ist ja genug platz
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:26:05</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wenn wir mal virtuelle welten haben werden...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:26:12</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            hat sich das ganze problem gelöst ...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:26:21</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Wir haben einige schräge Vogel im Verein. Einen Verschwörungstheoretiker und einen Schriftsteller.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:26:31</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            uh, man weiß nicht was schlimmer ist^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:26:52</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            (Ah. Des schriftstellers Bild fehlt noch..)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:27:12</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            sind das nur die mit blog?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:27:21</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Nur die mit Website.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:27:26</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Das ist der Herr, der noch fehlt: http://www.derkleinedilettant.de/
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:28:17</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            schreib doch auch mal ein buch
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:28:59</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            über erkenntnistheorie
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:29:12</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Dazu fehlt mir die Expertise.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:29:49</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            du sollst ja kein geschichtspholosphisches werk schreiben
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:30:28</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            die fähigkeit zum logischen denken, sollte genügen - und die hast du in hohem maße
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:30:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Das andere Problem ist der Wort-Count.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:30:59</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Danke.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:31:33</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            Wort-Count? du meinst, du kommst zu schnell auf den punkt?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:31:47</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Das Problem ist, dass ich meine Texte immer extrem Zusammenkürze :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:32:13</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            das ist gut
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:32:19</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            morge freiman veranschaulicht das Prob ganz gut :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:32:27</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            aber, hast du z.b. mal sen gelesen?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:32:28</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ein ökonom, der eine these in zwei seiten aufschreibt und diese dann über ein ganzes buch auswälzt ...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:33:06</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            mit hunderten beispielen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:33:12</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            usw.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:33:13</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ah.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:33:16</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            In die Richtung hab ich auch mal gedacht. Eine Art "Deutsch-Erisisch"-Beispiele Sektion.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:33:47</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            oder du dekonstruierst noch einige andere denkansätze
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:34:11</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            In der letzten Woche hab ich versucht das Thema wieder aufzunehmen - erstmal eine Menge bei erisisch.de gestriche :) - und hab ein paar Ideen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:35:01</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ob das noch bei erisisch.de reinpasst ist die Frage.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:35:19</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich hab schon mit dem Gedanken gespielt es streitbarer zu gestalten und vielleicht das Wort Nihilismus drauf zu pappen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:35:57</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Aber dafür ist erstmal eine Lektüre zum Begriff nötig denke ich.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:36:10</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Die Wortbedeutung selbst passt gut :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:36:17</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ja, aber der nietzsche hat ziemlich viel unsinn geredet
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:37:13</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            kann mir nicht vorstellen, dass der nihilismus da heraussticht
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:37:25</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            er hat auch immer mit begriffen wie "natürlichkeit" gearbeitet
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:37:38</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            der mensch muss bla bla
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:37:41</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Der Mensch ist ein Seil. Gespannt zwischen Mensch und Übermensch.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:37:59</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Also den Part finde ich top.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:38:09</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Schön poetisch :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:38:17</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            verstehe ich ohne zusammenhang jetzt gar nicht
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:38:35</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich hab leider auch keine begründete Meinung darüber, was er damit meint, nur die Vermutung, dass es um banale Evolution geht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:40:00</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ah, verstehe
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:40:16</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Der Mensch wird sich irgend etwas entwickeln, dass nicht mehr "biologisch kompatibel" mit dem ist, was momentan als Mensch durchgeht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:40:19</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            die entwicklung zu was "höherem"
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:40:24</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Was anderem.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:40:30</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            nietsche würde was höheres sagen
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:40:39</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            "Über-" eben.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:40:45</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wir erlauben uns kein werturteil^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:40:49</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Aber bei Philosophen kann man ja nicht so sicher sein, ob die auch damit ne Wertung verbinden ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:41:03</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Über könnte sich ja einfach auf den Stammbaum beziehen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:41:24</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            http://morgen.blogage.de/entries/2008/11/5/Also-sprach-Zarathustra
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:42:01</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Super toll gelesen, wie ich finde.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:42:07</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            nietzsche hat ja auch die eigenschaften des übermenschen beschrieben und sie eindeutig als etwas aus seiner sicht positives gewertet
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:42:09</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich hab ihn bisher nur über dieses Youtube Video rezipiert...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:42:30</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Diese Kiste mit den Nationalsozialisten lag aber wohl nicht in seinem Werk.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:42:59</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Da hat seine Schwester nachsortiert/-interpretiert.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:43:12</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich glaub du hast mir soeben einen Twitter-Follower beschert.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:43:44</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            sind das die erste sätze von "also sprach Zarathustra"?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:43:52</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ja.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:43:57</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            kann gut sein^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:43:58</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            naja, er ist halt mehr poet als philosoph
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:44:44</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ja, halte ich für grauenhaft, wenn man mit dem Text arbeiten will.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:45:01</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            x)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:45:03</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Aber dem Elaphos hab ich bestimmt 5 mal zugehört :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:45:16</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            worauf will nietzsche denn mit der geschichte von zarathustra hinaus?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:45:45</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich weiß leider nicht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:45:59</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ist aber auf jedenfall eine interessante Gestalt, auch für den einfachen Atheisten.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:47:12</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Manfred Lutz verkündete mal, der Nietzsche sei der einzige Atheist, der das "zuende" gedacht hätte.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:47:37</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            habe mich nie mit ihm beschäftigt - aber er war der erste bekannte monotheist, oder?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:47:38</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Nein. Er war Atheist.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:47:51</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            zharatrusta
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:47:59</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ach so, du meintest nietzsche
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:48:12</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            "Wusste er nicht, dass Gott tot ist?"
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:48:13</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Sagt er dieser Charakter.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:48:30</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            (In dem Ausschnitt, der von Elaphos gelesen wird.)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:48:49</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            also der historische zarathusta war definitiv kein atheist
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:50:02</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            sondern begründer einer religion^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:50:10</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ah.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:50:13</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            interessant, hier steht nicht mal ungefähr, wann er gelebt hat: http://de.wikipedia.org/wiki/Zarathustra
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:51:06</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Etwas weiter unten.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:51:53</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ah ja
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:52:21</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wann lebte abraham?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:52:31</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich würde momentan davon ausgehen, dass es nur eine Romanfigur ist.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:53:00</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            hast recht: "Außerhalb der biblischen Erzählungen und davon abhängigen Traditionen gibt es keine Nachweise für die Existenz Abrahams, daher ist seine Historizität fraglich."
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:53:29</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Gerade auch entdeckt.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:53:34</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Hehe, 175 Jahre.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:54:01</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Nett.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:54:02</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            was?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:54:12</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Abraham stirbt nach Gen 25,7-10 EU im Alter von 175 Jahren ....
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:54:22</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ach so^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:54:29</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Aber er wird ja noch übertrumpht.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:54:49</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Methusalem
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:54:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Im Alter von 187 Jahren zeugte er Lamech, danach lebte er noch 782 Jahre („… und zeugte Söhne und Töchter").
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:55:06</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ja, aber es gibt auch einige andere, die älter wurden laut bibel
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:55:12</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            969 Jahre alt und ist damit der älteste in der Heiligen Schrift 
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:55:19</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            es heißt ja nicht umsonst "biblisches alter"
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:55:28</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich meine älter als abraham
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:55:39</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            "Methusalemisierung"
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:55:43</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Methusaleha Foundation ;)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:55:52</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Der Herr DeGrey hinter dieser Foundation ist davon überzeugt, dass er seine Generation noch retten kann.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:57:05</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            retten in welcher hinsicht?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:57:40</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Vor dem nicht-selbstbestimmten Sterben.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:57:58</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            (Mal von Unfällen/Kriegen abgesehen)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:58:10</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            also ewiges leben?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:58:18</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ungefähr.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:58:27</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Also ja :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:58:37</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            oder halt suizid
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:58:42</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ja, genau.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:58:53</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Oder Hitzetod.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:58:56</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wieso ist hitzetod selbstbestimmt? es sei denn natürlich, es ist die art suizid, die man wählt
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:59:21</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            (Jenachdem. Wilson meint ja, wir sollten an diesem Gesetz zweifeln und versuchen es zu falsifizieren- wie bei Theorien üblich)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:59:26</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            dann soll er das mal versuchen^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:59:40</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">02:59:43</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich glaub nicht, dass ers schafft
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">02:59:48</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Suizid oder Hitzetod - abgesehen von Unfällen und Übergriffen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:00:05</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            okay
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:00:11</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ist man Christ muss man auf zweiteres warten.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:00:57</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            (Je nach Auslegung natürlich)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:01:12</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Bezügl. des BPID Sponsorings. Wie steht es um dein "Eher nein" bzw. soll ich später nochmal fragen?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:11:44</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            was genau wolltest du da?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:11:58</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Nur ein Mailman o.a.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:12:07</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ach so, einfach unseren server nutzen?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:12:21</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Genau. Und dafür dann eben ein Blogage Banner unten hin.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:12:33</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            also von mir aus gerne, da müsstest du dich allerdings an mutle wenden
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:12:53</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Oh, cool.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:13:00</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            kannst ja sagen, dass ich das unterstütze
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:13:01</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Eine Vorliebe, was das Banner angeht?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:14:55</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            nein
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:15:06</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ich dachte gerade an sowas in CC größe.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:15:39</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            http://assets2.blogage.de/images/licenses/bysa.png?1247209265
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:15:45</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            wir haben ja banner
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:16:29</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            moment
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:16:31</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            http://news.blogage.de/entries/pages/Microbutton
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:17:26</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Hatte ich in Erinnerung aber nicht gefunden x)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:17:49</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ich hatte auch gerade probleme
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:18:04</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            da stand glaube ich mal "spread the word" drüber
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:18:14</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            blogage.de - kostenloses Portal für gratis Blogs und Social Networking
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:18:43</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Schräge Dopplung.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:18:49</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            keywords ...
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:19:00</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ah :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:19:03</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            http://d3v.at/bpid/
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:24:44</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Ganz unten.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:24:49</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            ah, danke
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:25:04</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            aber noch wird ja nicht gefördert^^
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:25:13</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Noch ist die Website auch nirgends außer in FU verlinkt :)
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:25:30</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            warum hat die website eigentliche eine .at-adresse?
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:25:31</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Meine erste Domain für kleine Projekte war
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:25:52</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            d3velop.net
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:25:54</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Dann kamen die .at Domains und ich fands toll, dass sich daraus ein Satz ergab: develop at
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:26:27</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Das wurde noch eingedampft und raus kam d3v.at/projektname
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:26:41</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            verstehe
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:26:48</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Viel Spaß beim weiteren Nachtschwärmen.
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:52:56</span>
+          </div>
+        </div>
+
+        <div class="message sent">
+          <div class="message-content">
+            Bis dann!
+          </div>
+          <div class="message-meta">
+            <span class="sender">Per Guth</span>
+            <span class="timestamp">03:52:59</span>
+          </div>
+        </div>
+
+        <div class="message received">
+          <div class="message-content">
+            alles klar, gute nacht!
+          </div>
+          <div class="message-meta">
+            <span class="sender">Der dessen Name nicht genannt werden soll</span>
+            <span class="timestamp">03:53:13</span>
           </div>
         </div>
       </div>
@@ -495,7 +3536,7 @@
   <footer>
     <p>Dieses digitale Archiv enthält authentische Chatprotokolle aus dem Jahr 2009.</p>
     <p>© 2025 <span class="highlight">perguth.de/zeitreise</span> – Eine digitale Zeitkapsel</p>
-    <p>Es war fun!</p>
+    <p>"Hack the Planet!" – <span class="highlight">Hackers, 1995</span></p>
   </footer>
 </body>
 </html>
